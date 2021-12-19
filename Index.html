@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://raw.githack.com/programming2007/illustration/main/illustration.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/be2c2b534e.js" crossorigin="anonymous"></script>
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+        
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        *:hover{
+            
+            transition: 0.8s ease;
+            
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(#00FFFF, #fff);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 350px;
+            height: 72%;
+            background-color: #000000d0;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1em;
+            color: white;
+        }
+        
+        .card:hover{
+            
+            transition: 1s ease;
+            
+        }
+        
+        .container:hover{
+            
+            
+            transition: ease 0.8s;
+            
+        }
+
+        .search {
+            display: flex;
+            position: absolute;
+            top: calc(50% - 120px);
+            left: calc(50% - 112px);
+
+        }
+        
+        .search:hover{
+            
+            transition: 1s ease;
+            
+        }
+
+        input {
+            background-color: #fff;
+            color: black;
+            padding: 1em;
+        }
+        
+        input:hover{
+            
+            transition: 1s ease;
+            
+        }
+
+        ::placeholder {
+            color: #000000d0;
+        }
+        
+        ::placeholder:hover{
+            
+            transition: 1s ease;
+            
+        }
+
+        button {
+            width: 30px;
+            height: 30px;
+            border: 0;
+            margin-left: 5px;
+            background-color: #292626;
+            opacity: 60%;
+        }
+        
+        button:hover {
+            
+            transition: 1s ease;
+            
+        }
+
+        img {
+            width: 25px;
+        }
+        
+        img:hover
+{
+
+transition: 1s ease;
+
+}
+
+        .weather {
+            position: absolute;
+            left: calc(50% - 120px);
+        }
+        
+        .weather:hover{
+            
+            transition: 1s ease;
+            
+        }
+
+        .i {
+            display: flex;
+            text-transform : capitalize;
+        }
+        
+        .i:hover {
+            
+            transition: 1s ease;
+            
+        }
+        
+        body:hover{
+            
+            transition: 1s ease;
+            
+        }
+        .input {
+            
+            border: none;
+            
+            
+        }
+        .input:hover{
+            
+            transition: 1s ease-out;
+            
+        }
+    </style>
+    <script src="weatherapp.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="search">
+                <input type="text" class="input" placeholder="Search" id="inp">
+                <button id="btn"><img src="https://image.flaticon.com/icons/png/512/751/751381.png"></button>
+            </div>
+
+            
+                <p></p><br>
+                <p></p><br><div class="weather">
+                <br>
+                <h2 class="city"></h2>
+                <br>
+                <div class="temp"><h1></h1></div>
+                <div class="i">
+                    <img src="https://openweathermap.org/img/wn/01d.png" alt="" class="icon">
+                <div class="description"></div>
+                </div>
+                <div class="humidity"></div>
+                <div class="wind"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let btn = document.getElementById('btn')
+btn.onclick = function () {
+    weather.search()
+}
+
+let inp = document.getElementById("inp")
+
+inp.onkeyup = function (e) {
+    if (e.key == "Enter") {
+        weather.search()
+    }
+}
+
+    </script>
+        
+</body>
+<script>
+    $.ajax({ type: "GET", dataType: "json", url: 'https://ip.seeip.org/geoip/', success: function(data) { 
+
+
+weather.fetchWeather(data.region)
+
+} });
+
+            
+let weather = {
+    apiKey: "6130a6c99ed65b109b143930809348a7",
+    fetchWeather: function (city) {
+        fetch("https://api.openweathermap.org/data/2.5/weather?q="
+            + city + "&units=metric&appid="
+            + this.apiKey
+        )
+            .then((response) => response.json())
+            .then((data) => this.displayWeather(data));
+    },
+    displayWeather: function (data) {
+        
+
+        let { name } = data;
+        let { icon, description } = data.weather[0]
+        let { temp, humidity } = data.main;
+        let { speed } = data.wind
+        document.querySelector(".city").innerHTML = "Weather in " + name
+
+        document.querySelector(".icon").src = "https://openweathermap.org/img/wn/" + icon + ".png"
+
+        document.querySelector(".description").innerHTML = description
+
+        document.querySelector(".temp").innerHTML = "<h1>" + temp + "°C" + "</h1>"
+
+        document.querySelector(".humidity").innerHTML = "Humidity: " + humidity + "%"
+
+        document.querySelector(".wind").innerHTML = "Wind speed: " + speed + " km/h"
+
+        
+
+
+    },
+
+    search: function () {
+        this.fetchWeather(document.getElementById('inp').value)
+    }
+
+}
+
+</script>
+</html>
