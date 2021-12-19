@@ -239,7 +239,7 @@ inp.onkeyup = function (e) {
     $.ajax({ type: "GET", dataType: "json", url: 'https://ip.seeip.org/geoip/', success: function(data) { 
 
 
-weather.fetchWeather(data.region)
+weather.fetchWeather(data.region+", "+data.country)
 
 } });
 
