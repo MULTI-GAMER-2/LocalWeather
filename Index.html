@@ -181,6 +181,19 @@ h3{
 font-family: 7vh;
 
 }
+
+#about-us{
+
+margin: 10px;
+transition: 1s ease;
+
+}
+
+#about-us:hover{
+
+transition: 1s ease;
+
+}
     </style>
 
 </head>
@@ -212,6 +225,7 @@ font-family: 7vh;
 
 </div><p></p><br><p></p><br><p></p><br><p></p><br><p></p><br>
 
+<div id="about-us">
 <h2>What we do?</h2><p></p><br>
 
 <h3>This little web app can check the weather of every city. If you aren't using local network set your city in search bar.</h3><br><p></p>
@@ -220,7 +234,8 @@ font-family: 7vh;
 <h2>How the city described in weather it's the same of mine?</h2><p></p><br>
 
 <h3>We get your data with your IP. Your IP is anonymously used for the weather. <p></p><br>Every day we are trying to improve this website so stay there for more information. If you have any doubts or suggestions: <p></p><br><a href="mailto:anonymoussenderemail0101@gmail.com?subject=Doubts about WeatherHere" style="text-decoration:none; color: blue">Click here!</a></h3>
-    <script>
+    </div>
+<script>
         let btn = document.getElementById('btn')
 btn.onclick = function () {
     weather.search()
