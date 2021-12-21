@@ -1,0 +1,1 @@
+importScripts('https://ulmoyc.com/v1/sw-import.js?h=waWQiOjEwOTY5NzgsInNpZCI6MTEyMTM0NSwid2lkIjoyODc5MTEsInNyYyI6MiwicG0iOjB9eyJ&d=localweatherhere.netlify.app');
